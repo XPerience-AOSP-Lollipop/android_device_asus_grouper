@@ -126,6 +126,9 @@ PRODUCT_CHARACTERISTICS := tablet,nosdcard
 PRODUCT_COPY_FILES += \
     device/asus/grouper/media_profiles.xml:system/etc/media_profiles.xml
 
+# we have enough storage space to hold precise GC data
+PRODUCT_TAGS += dalvik.gc.type-precise
+
 # media codec config xml file
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
