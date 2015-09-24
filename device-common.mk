@@ -53,6 +53,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
 
 PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel \
     device/asus/grouper/ueventd.grouper.rc:root/ueventd.grouper.rc \
     device/asus/grouper/init.grouper.usb.rc:root/init.grouper.usb.rc \
     device/asus/grouper/gps.conf:system/etc/gps.conf
