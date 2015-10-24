@@ -14,12 +14,6 @@
 # limitations under the License.
 #
 
-#ifeq ($(TARGET_PREBUILT_KERNEL),)
-#  LOCAL_KERNEL := kernel/tegra/arch/arm/boot/zImage
-#else
-#  LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-#endif
-
 ifeq ($(TARGET_PREBUILT_KERNEL),)
     LOCAL_KERNEL := device/asus/grouper/kernel
 else
@@ -46,17 +40,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
-# Enable USB OTG support
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.isUsbOtgEnabled=true
-
 include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
     device/asus/grouper/ueventd.grouper.rc:root/ueventd.grouper.rc \
     device/asus/grouper/init.grouper.usb.rc:root/init.grouper.usb.rc \
-    device/asus/grouper/gps.conf:system/etc/gps.conf
+    device/asus/grouper/gps.conf:system/etc/gps.conf \
+    device/asus/grouper/touch_fw_update.sh:system/bin/touch_fw_update.sh \
+    device/asus/grouper/gps_daemon.sh:system/bin/gps_daemon.sh
 
 ifneq ($(TARGET_PREBUILT_WIFI_MODULE),)
 PRODUCT_COPY_FILES += \
@@ -75,7 +67,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml
 
 PRODUCT_COPY_FILES += \
@@ -84,14 +75,19 @@ PRODUCT_COPY_FILES += \
     device/asus/grouper/sensor00fn11.idc:system/usr/idc/sensor00fn11.idc \
     device/asus/grouper/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
 
-PRODUCT_PACKAGES := \
+PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
     dhcpcd.conf \
     wpa_supplicant \
     wpa_supplicant.conf
 
+#help GL work in M
 PRODUCT_PACKAGES += \
+    libdgv1
+
+PRODUCT_PACKAGES += \
+    sensors-config \
     lights.grouper \
     audio.primary.grouper \
     power.grouper \
@@ -110,24 +106,23 @@ PRODUCT_PACKAGES += \
 # NFC packages
 PRODUCT_PACKAGES += \
     nfc.grouper \
+    libnfc\
     Nfc \
     Tag
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
-    fsck.f2fs \
-    mkfs.f2fs \
     e2fsck \
     setup_fs
 
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
+# we have enough storage space to hold precise GC data
+PRODUCT_TAGS += dalvik.gc.type-precise
+
 # media config xml file
 PRODUCT_COPY_FILES += \
     device/asus/grouper/media_profiles.xml:system/etc/media_profiles.xml
-
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
 
 # media codec config xml file
 PRODUCT_COPY_FILES += \

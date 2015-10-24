@@ -37,9 +37,6 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := cortex-a9
 
 TARGET_USERIMAGES_USE_EXT4 := true
-ifeq ($(HOST_OS),linux)
-TARGET_USERIMAGES_USE_F2FS := true
-endif
 
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 681574400
 # Disable journaling on system.img to save space.
@@ -60,7 +57,6 @@ WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
 
 TARGET_BOOTLOADER_BOARD_NAME := grouper
-TARGET_NO_BOOTLOADER := true
 
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_ALSA_AUDIO := false
@@ -72,9 +68,6 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 
 USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/asus/grouper/egl.cfg
-
-# Hardware tunables
-BOARD_HARDWARE_CLASS := device/asus/grouper/cmhw/
 
 ifneq ($(HAVE_NVIDIA_PROP_SRC),false)
 # needed for source compilation of nvidia libraries
@@ -88,11 +81,9 @@ NEED_WORKAROUND_CORTEX_A9_745320 := true
 BOARD_USES_GROUPER_MODULES := true
 
 BOARD_KERNEL_CMDLINE := androidboot.hardware=$(TARGET_BOOTLOADER_BOARD_NAME)
-
-#TARGET_KERNEL_SOURCE := kernel/asus/grouper
-#TARGET_KERNEL_CONFIG := grouper_defconfig
+TARGET_KERNEL_CONFIG := tegra3_android_defconfig
+TARGET_KERNEL_SOURCE := kernel/asus/grouper
 
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
-BOARD_SEPOLICY_DIRS += \
-        device/asus/grouper/sepolicy
+BOARD_SEPOLICY_DIRS += device/asus/grouper/sepolicy
