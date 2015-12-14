@@ -40,5 +40,22 @@ include device/asus/grouper/BoardConfigCommon.mk
 
 TARGET_RECOVERY_FSTAB = device/asus/grouper/fstab.grouper
 
+MALLOC_IMPL := dlmalloc
 DEVICE_RESOLUTION := 720x1280
 #BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 1
+
+# inherit from the proprietary version
+-include vendor/asus/grouper/BoardConfigVendor.mk
+# inherit from the proprietary version
+-include vendor/broadcom/grouper/BoardConfigVendor.mk
+# inherit from the proprietary version
+-include vendor/elan/grouper/BoardConfigVendor.mk
+# inherit from the proprietary version
+-include vendor/invensense/grouper/BoardConfigVendor.mk
+# inherit from the proprietary version
+-include vendor/nvidia/grouper/BoardConfigVendor.mk
+# inherit from the proprietary version
+-include vendor/nxp/grouper/BoardConfigVendor.mk
+# inherit from the proprietary version
+-include vendor/widevine/grouper/BoardConfigVendor.mk
+
