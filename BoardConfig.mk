@@ -40,4 +40,5 @@ include device/asus/grouper/BoardConfigCommon.mk
 
 TARGET_RECOVERY_FSTAB = device/asus/grouper/fstab.grouper
 
+DEVICE_RESOLUTION := 720x1280
 #BOARD_WIDEVINE_OEMCRYPTO_LEVEL := 1
