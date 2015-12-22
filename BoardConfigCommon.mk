@@ -26,53 +26,55 @@
 # Default value, if not overridden else where.
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/asus/grouper/bluetooth
 
-TARGET_BOARD_PLATFORM := tegra3
-TARGET_TEGRA_VERSION := t30
+TARGET_BOARD_PLATFORM 		:= tegra3
+TARGET_TEGRA_VERSION 		:= t30
 
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_VARIANT := cortex-a9
+TARGET_CPU_ABI 			:= armeabi-v7a
+TARGET_CPU_ABI2 		:= armeabi
+TARGET_CPU_SMP 			:= true
+TARGET_ARCH 			:= arm
+TARGET_ARCH_VARIANT 		:= armv7-a-neon
+TARGET_CPU_VARIANT 		:= cortex-a9
 
-TARGET_USERIMAGES_USE_EXT4 := true
+# Avoid the generation of ldrcc instructions
+NEED_WORKAROUND_CORTEX_A9_745320	:= true
+
+TARGET_USERIMAGES_USE_EXT4 	:= true
 
 #Board Patitions
-BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 12582912
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 681574400
-BOARD_CACHEIMAGE_PARTITION_SIZE := 464519168
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 6567231488
-BOARD_CACHEIMAGE_PARTITION_SIZE := 457179136
-BOARD_FLASH_BLOCK_SIZE := 4096
+BOARD_BOOTIMAGE_PARTITION_SIZE 		:= 8388608
+BOARD_RECOVERYIMAGE_PARTITION_SIZE 	:= 12582912
+BOARD_SYSTEMIMAGE_PARTITION_SIZE	:= 681574400
+BOARD_CACHEIMAGE_PARTITION_SIZE 	:= 464519168
+BOARD_USERDATAIMAGE_PARTITION_SIZE 	:= 6567231488
+BOARD_CACHEIMAGE_PARTITION_SIZE 	:= 457179136
+BOARD_FLASH_BLOCK_SIZE 			:= 4096
 
 # Disable journaling on system.img to save space.
-BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
+BOARD_SYSTEMIMAGE_JOURNAL_SIZE 		:= 0
 
 # Wifi related defines
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-WPA_SUPPLICANT_VERSION      := VER_0_8_X
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-BOARD_HOSTAPD_DRIVER        := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
-BOARD_WLAN_DEVICE           := bcmdhd
-#WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcm4329.ko"
-WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
-WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
+BOARD_WPA_SUPPLICANT_DRIVER 		:= NL80211
+WPA_SUPPLICANT_VERSION      		:= VER_0_8_X
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB 	:= lib_driver_cmd_bcmdhd
+BOARD_HOSTAPD_DRIVER        		:= NL80211
+BOARD_HOSTAPD_PRIVATE_LIB  		:= lib_driver_cmd_bcmdhd
+BOARD_WLAN_DEVICE           		:= bcmdhd
+WIFI_DRIVER_FW_PATH_PARAM   		:= "/sys/module/bcmdhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_STA     		:= "/vendor/firmware/fw_bcmdhd.bin"
+WIFI_DRIVER_FW_PATH_AP     		:= "/vendor/firmware/fw_bcmdhd_apsta.bin"
 
-TARGET_BOOTLOADER_BOARD_NAME := grouper
+TARGET_BOOTLOADER_BOARD_NAME 		:= grouper
 
-BOARD_USES_GENERIC_AUDIO := false
-BOARD_USES_ALSA_AUDIO := false
+BOARD_USES_GENERIC_AUDIO 		:= false
+BOARD_USES_ALSA_AUDIO 			:= false
 
-BOARD_USES_GENERIC_INVENSENSE := false
+BOARD_USES_GENERIC_INVENSENSE 		:= false
 
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_HAVE_BLUETOOTH 			:= true
+BOARD_HAVE_BLUETOOTH_BCM 		:= true
 
-USE_OPENGL_RENDERER := true
+USE_OPENGL_RENDERER			 := true
 
 ifneq ($(HAVE_NVIDIA_PROP_SRC),false)
 # needed for source compilation of nvidia libraries
@@ -80,14 +82,11 @@ ifneq ($(HAVE_NVIDIA_PROP_SRC),false)
 -include vendor/nvidia/build/definitions.mk
 endif
 
-# Avoid the generation of ldrcc instructions
-NEED_WORKAROUND_CORTEX_A9_745320 := true
+BOARD_USES_GROUPER_MODULES 	:= true
 
-BOARD_USES_GROUPER_MODULES := true
-
-BOARD_KERNEL_CMDLINE := androidboot.hardware=$(TARGET_BOOTLOADER_BOARD_NAME)
-TARGET_KERNEL_CONFIG := tegra3_android_defconfig
-TARGET_KERNEL_SOURCE := kernel/asus/grouper
+BOARD_KERNEL_CMDLINE 		:= androidboot.hardware=$(TARGET_BOOTLOADER_BOARD_NAME)
+TARGET_KERNEL_CONFIG 		:= tegra3_android_defconfig
+TARGET_KERNEL_SOURCE 		:= kernel/asus/grouper
 
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
