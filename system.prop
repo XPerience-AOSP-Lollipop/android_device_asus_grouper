@@ -20,3 +20,6 @@ persist.tegra.didim.video = 5
 
 #Enable multiwindow
 -persist.sys.debug.multi_window=true
+
+# disable PRISM by default
+persist.tegra.didim.enable=0
