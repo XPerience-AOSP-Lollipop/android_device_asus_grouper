@@ -22,6 +22,8 @@ TARGET_CPU_VARIANT := cortex-a9
 
 TARGET_BOOTLOADER_BOARD_NAME := grouper
 
+DEVICE_RESOLUTION := 720x1280
+
 # Avoid the generation of ldrcc instructions
 NEED_WORKAROUND_CORTEX_A9_745320 := true
 
