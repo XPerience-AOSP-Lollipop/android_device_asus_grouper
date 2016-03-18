@@ -92,7 +92,8 @@ PRODUCT_COPY_FILES += \
 # NFC
 PRODUCT_PACKAGES += \
     nfc.grouper \
-    NfcNxp \
+    libnfc\
+    Nfc \
     Tag
 
 # Filesystem management tools
